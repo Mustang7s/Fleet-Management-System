@@ -1,45 +1,99 @@
-# FleetManagement (Java, Swing, MySQL, NetBeans-ready)
-#139691-Rutto Evans
+# FleetManagement (Java + MySQL + NetBeans)
 
-A simple **Fleet Management System** demonstrating core OOP principles and a working **MySQL-backed** login and fleet CRUD UI.
+**Author:** Evans Rutto  
+**Admission:** 139691  
+
+---
 
 ## Features
-- **OOP**: Abstraction (`Vehicle`), Inheritance (`Car`, `Truck`), Encapsulation (private fields + getters/setters), Polymorphism (`info()` overridden).
-- **Objects communicating**: `MainDashboard` ⇄ `DatabaseConnection` ⇄ `FleetManager` ⇄ `Vehicle` subclasses.
-- **Login with MySQL** (`users` table).
-- **Fleet stored in MySQL** (`vehicles` table).
-- **GUI (Swing)**: view, add, and delete vehicles in a JTable.
+- **Login system** connected to MySQL (`users` table).  
+- **Fleet management** with CRUD operations:  
+  - View vehicles in a JTable.  
+  - Add new vehicles (Car/Truck).  
+  - Delete selected vehicles.  
+- **OOP principles covered**:
+  - **Encapsulation**: private fields + getters/setters (`User`, `Vehicle`).  
+  - **Abstraction**: `Vehicle` is abstract with abstract method `info()`.  
+  - **Inheritance**: `Car` and `Truck` extend `Vehicle`.  
+  - **Polymorphism**: `info()` overridden in subclasses.  
+- **Objects communicating**: GUI ↔ `DatabaseConnection` ↔ `Vehicle` subclasses.  
+- Runs in **NetBeans** with **MySQL backend**.  
 
-## Run Instructions (NetBeans)
-1. Import the database:
-   ```bash
-   mysql -u root -p -e "SOURCE fleetdb.sql"
+---
+
+## ⚙️ Setup Instructions
+
+### 1. Database
+1. Open XAMPP → Start **Apache** and **MySQL**.  
+2. Go to: [http://localhost/phpmyadmin](http://localhost/phpmyadmin)  
+3. Create database `fleetdb`.  
+4. Import `fleetdb.sql` from the project folder.  
+
+Default user:  
+```
+Username: admin
+Password: 1234
+```
+
+---
+
+### 2. NetBeans Project
+1. Open **NetBeans** → Create a new **Java Application** project → name it `FleetManagement`.  
+2. Copy the `src/fleetmanagement/` folder from this project into your project’s `src/`.  
+3. Add the MySQL JDBC driver:
+   - Download `mysql-connector-j-<version>.jar`.  
+   - In NetBeans → Project Properties → Libraries → Add JAR/Folder → select the jar.  
+
+---
+
+### 3. Run the App
+1. Run `fleetmanagement.LoginFrame`.  
+2. Login using:  
    ```
-   (Press Enter when prompted if you have **no password**.)
-2. Create a new **Java Application** project in NetBeans (e.g., name it `FleetManagement`).
-3. Copy the `src/fleetmanagement` folder **from this zip** into your project's `src/`.
-4. Add **MySQL Connector/J** to Libraries:
-   - Download the jar from Oracle/MySQL (e.g., `mysql-connector-j-8.4.x.jar`).
-   - NetBeans: *Right-click Project → Properties → Libraries → Add JAR/Folder*.
-5. Run `fleetmanagement.LoginFrame`.
-6. Login with: **admin / 1234**.
+   Username: admin
+   Password: 1234
+   ```
+3. The **Fleet Dashboard** opens:  
+   - **Refresh** → Load vehicles from DB.  
+   - **Add Vehicle** → Add a new Car or Truck (saved to DB).  
+   - **Delete Selected** → Remove a vehicle by plate number.  
+   - **Logout** → Return to login screen.  
 
-## Database Schema
-See `fleetdb.sql`. It creates:
-- `users` with default `admin/1234`.
-- `vehicles` with sample data.
+---
 
-## Marking Rubric Mapping
-1. **Four classes+**: Vehicle, Car, Truck, FleetManager, User, DatabaseConnection, LoginFrame, MainDashboard, AddVehicleDialog.
-2. **Three communicating objects**: GUI ↔ DatabaseConnection ↔ Vehicle/FleetManager.
-3. **Encapsulation**: private fields + getters/setters across domain classes.
-4. **Inheritance**: Car, Truck extend Vehicle.
-5. **Polymorphism**: `info()` overridden in Car/Truck; `fetchFleet()` builds subclass instances and UI renders accordingly.
-6. **Abstraction**: `Vehicle` is abstract with abstract `info()`.
-7. **DB Login**: `DatabaseConnection.checkLogin()` against MySQL.
-8. **GUI**: Swing-based login + dashboard, JTable, add/delete dialog.
+##  Project Structure
+```
+FleetManagement/
+ ├─ src/fleetmanagement/
+ │    ├─ Vehicle.java           (Abstract base class)
+ │    ├─ Car.java               (Subclass)
+ │    ├─ Truck.java             (Subclass)
+ │    ├─ FleetManager.java      (Handles vehicle collection)
+ │    ├─ User.java              (Encapsulates login info)
+ │    ├─ DatabaseConnection.java (MySQL connectivity)
+ │    ├─ LoginFrame.java        (Login GUI)
+ │    ├─ MainDashboard.java     (Fleet GUI with JTable)
+ │    └─ AddVehicleDialog.java  (Dialog for new vehicles)
+ ├─ fleetdb.sql                 (Database schema + sample data)
+ ├─ lib/                        (Put mysql-connector-j.jar here)
+ └─ README.md                   (This file)
+```
 
-## Notes
-- Keep your MySQL running on `localhost:3306` and database `fleetdb`.
-- If you use a different DB user/password, edit them in `DatabaseConnection.java`.
+---
 
+##  Coverage
+1. **4+ classes** → ✅ (`Vehicle`, `Car`, `Truck`, `FleetManager`, `User`, etc.)  
+2. **3 communicating objects** → ✅ (`MainDashboard` ↔ `DatabaseConnection` ↔ `Vehicle`)  
+3. **Encapsulation** → ✅ (`User`, `Vehicle` fields private)  
+4. **Inheritance** → ✅ (`Car`, `Truck` extend `Vehicle`)  
+5. **Polymorphism** → ✅ (`info()` overridden in subclasses)  
+6. **Abstraction** → ✅ (`Vehicle` abstract class)  
+7. **Database + Login** → ✅ (`users` table + authentication)  
+8. **GUI** → ✅ Swing login + dashboard with JTable  
+
+---
+
+##  Notes
+- Runs best on **Java 8+**.  
+- Requires **XAMPP MySQL running on localhost:3306**.  
+- If you use a different DB user/password, update them in `DatabaseConnection.java`.  
