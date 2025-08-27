@@ -1,4 +1,4 @@
-# FleetManagement (Java, Swing, MySQL, NetBeans-ready)
+# FleetManagement (Java, MySQL)
 #139691-Rutto Evans
 
 A simple **Fleet Management System** demonstrating core OOP principles and a working **MySQL-backed** login and fleet CRUD UI.
