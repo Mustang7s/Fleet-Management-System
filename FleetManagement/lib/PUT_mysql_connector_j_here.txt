@@ -1,0 +1,1 @@
+Place mysql-connector-j-<version>.jar in this folder and add it to NetBeans project Libraries.
